@@ -8,7 +8,7 @@
 class Matriz{
 private:
     frac ** m;
-    int dx, dy;
+    int dy, dx;
     void AllocArrays();
     // para ser usado na eliminação de Gauss
    int MaiorPivot(int Coluna)
@@ -30,7 +30,7 @@ private:
 }
 
 public:
-    Matriz(int sizeX, int sizeY);
+    Matriz(int Linhas, int Colunas);
     Matriz();
     Matriz(const Matriz& M);
     Matriz& operator = (const Matriz & M);
