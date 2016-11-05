@@ -3,22 +3,24 @@
 
 ostream& operator << (ostream& out, const Matriz& M)
 {
-   cout << '\n';
-   for(int i=0; i < M.dy;i++)
+    int i;
+
+
+   for(i=0; i < M.dy;i++)
    {
      out <<  "[";
      for(int j =0; j <  M.dx; j++)
-        out << setw(5) << M.m[i][j] << ' ';
-    out << " ]" << '\n' << '\n';
+        out << setw(3) << M.m[i][j];
+    out << "  ]" << '\n' << '\n';
    }
    return out;
 }
 
 void Matriz::AllocArrays()
  {
-   m = new frac * [dx];
-   for(int i=0; i < dx; i++)
-    m[i] =  new frac [dy];
+   m = new frac * [dy];
+   for(int i=0; i < dy; i++)
+    m[i] =  new frac [dx];
  }
 
 
@@ -29,15 +31,15 @@ Matriz operator * (const Matriz& m1, const Matriz& m2)
             cerr << "Matrizes não conforme para multiplicação";
             exit(4);
         }
-        Matriz p(m1.dx,m2.dy);
+        Matriz p(m1.dy,m2.dx);
         frac f;
 
-        for(int i=0; i < p.dx; i++)
+        for(int i=0; i < m1.dy; ++i)
         {
-            for(int j=0; j < p.dy; j++)
+            for(int j=0; j < m2.dx; ++j)
             {
                p.m[i][j] = (frac){0,1};
-               for(int k=0; k < m1.dy; k++)
+               for(int k=0; k < m1.dx; ++k)
                {
                    f = m1.m[i][k]*m2.m[k][j];
                    p.m[i][j] = p.m[i][j] + f;
@@ -171,14 +173,17 @@ Matriz Matriz::Transposta()
     return t;
 }
 
-Matriz::Matriz (int sizeX, int sizeY):dx(sizeX),dy(sizeY)
+Matriz::Matriz (int Linhas, int Colunas)
 {
+    dx = Colunas; dy = Linhas;
  AllocArrays();
 
 }
 
-Matriz::Matriz(const Matriz & M):dx(M.dx),dy(M.dy)
+Matriz::Matriz(const Matriz & M)
 {
+    dx = M.dx;
+    dy = M.dy;
 
 AllocArrays();
 for(int i=0; i < dx; i++)
@@ -204,7 +209,6 @@ Matriz& Matriz::operator=(const Matriz & M)
         }
         return *this;
 }
-
 
 
 
