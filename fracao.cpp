@@ -72,26 +72,7 @@ frac fracAbs(frac f)
 
 long mmc(long x, long y)
 {
-    long a = (x > 0)? x : -x;
-    long b = (y > 0)? y : -y;
-    short divisor = 2;
-    long prod = 1;
-    int resto_a, resto_b;
-
-    while(a > 1 || b  > 1)
-    {
-        resto_a = a % divisor;
-        resto_b = b % divisor;
-        if(resto_a == 0 || resto_b == 0)
-        {
-            if(resto_a == 0) a = a/divisor;
-            if(resto_b == 0) b = b/divisor;
-            prod *= divisor;
-        }
-        else divisor += 1;
-    }
-    return(prod);
-
+    return(x*y/mdc(x,y));
 }
 
 bool FracaoIgualAinteiro(frac f, long x)
